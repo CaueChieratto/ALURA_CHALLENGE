@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/vars.css" />
+    <link rel="stylesheet" href="/src/styles/reset.css" />
+    <link rel="stylesheet" href="/src/styles/pageOne/pageOne.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/src/assets/icons/icon.png" />
+    <title>Alura Geek</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logoInputContainer">
+          <img src="/src/assets/icons/Logo.png" />
+          <div class="containerInput">
+            <input type="text" placeholder="O que deseja encontrar?" />
+            <img src="/src/assets/icons/Icone.png" />
+          </div>
+        </div>
+        <button>Login</button>
+        <div class="menu">
+          <img src="/src/assets/icons/Menu.png" />
+        </div>
+      </nav>
+      <section>
+        <div class="banner">
+          <h1>Dezembro Promocional</h1>
+          <p>Produtos selecionados com 33% de desconto</p>
+          <button id="consoleView" onclick="goToConsoleSection()">
+            Ver Consoles
+          </button>
+        </div>
+      </section>
+    </header>
+    <main>
+      <section id="starWarsSection">
+        <div class="containerName">
+          <h2>Star Wars</h2>
+          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
+        </div>
+        <div class="containerProducts" id="starWars"></div>
+      </section>
+      <section id="consolesSection">
+        <div class="containerName">
+          <h2>Consoles</h2>
+          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
+        </div>
+        <div class="containerProducts" id="consoles"></div>
+      </section>
+      <section id="diversosSection">
+        <div class="containerName">
+          <h2>Diversos</h2>
+          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
+        </div>
+        <div class="containerProducts" id="diversos"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="containerFoot">
+        <div class="containerImgAndInfos">
+          <img src="/src/assets/icons/Logo.png" />
+          <div class="infos">
+            <p>Quem somos nós</p>
+            <p>Política de privacidade</p>
+            <p>Programa fidelidade</p>
+            <p>Nossas lojas</p>
+            <p>Quero ser franqueado</p>
+            <p>Anuncie aqui</p>
+          </div>
+        </div>
+        <div class="messageContainer">
+          <h2>Fale conosco</h2>
+          <div class="message">
+            <div class="messageWrapper">
+              <p>Nome</p>
+              <input type="text" />
+            </div>
+            <div class="messageWrapper">
+              <textarea placeholder="Escreva sua Mensagem"></textarea>
+            </div>
+          </div>
+          <button>Enviar menssagem</button>
+        </div>
+      </div>
+    </footer>
+    <span
+      >Desenvolvido por Cauê Batista Chieratto <br />
+      2025</span
+    >
+    <script src="/src/js/pageOne.js"></script>
+  </body>
+</html>

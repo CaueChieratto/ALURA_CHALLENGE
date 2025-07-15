@@ -1,0 +1,10 @@
+:root {
+  --mainSource: "Raleway", sans-serif;
+  --secondarySource: "Chakra Petch", sans-serif;
+
+  --buttonBlue: #2a7ae4;
+  --buttonBlueHover: #5595e9;
+  --borderBlueHover: #d4e4fa;
+
+  --fontColorInputSearch: #a2a2a2;
+}
