@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" page="primary">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/vars.css" />
     <link rel="stylesheet" href="/src/styles/reset.css" />
     <link rel="stylesheet" href="/src/styles/pageOne/pageOne.css" />
+    <link rel="stylesheet" href="/src/styles/componentsStyles/footer.css" />
+    <link rel="stylesheet" href="/src/styles/componentsStyles/nav.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,19 +19,7 @@
   </head>
   <body>
     <header>
-      <nav>
-        <div class="logoInputContainer">
-          <img src="/src/assets/icons/Logo.png" />
-          <div class="containerInput">
-            <input type="text" placeholder="O que deseja encontrar?" />
-            <img src="/src/assets/icons/Icone.png" />
-          </div>
-        </div>
-        <button>Login</button>
-        <div class="menu">
-          <img src="/src/assets/icons/Menu.png" />
-        </div>
-      </nav>
+      <nav></nav>
       <section>
         <div class="banner">
           <h1>Dezembro Promocional</h1>
@@ -63,38 +53,9 @@
         <div class="containerProducts" id="diversos"></div>
       </section>
     </main>
-    <footer>
-      <div class="containerFoot">
-        <div class="containerImgAndInfos">
-          <img src="/src/assets/icons/Logo.png" />
-          <div class="infos">
-            <p>Quem somos nós</p>
-            <p>Política de privacidade</p>
-            <p>Programa fidelidade</p>
-            <p>Nossas lojas</p>
-            <p>Quero ser franqueado</p>
-            <p>Anuncie aqui</p>
-          </div>
-        </div>
-        <div class="messageContainer">
-          <h2>Fale conosco</h2>
-          <div class="message">
-            <div class="messageWrapper">
-              <p>Nome</p>
-              <input type="text" />
-            </div>
-            <div class="messageWrapper">
-              <textarea placeholder="Escreva sua Mensagem"></textarea>
-            </div>
-          </div>
-          <button>Enviar menssagem</button>
-        </div>
-      </div>
-    </footer>
-    <span
-      >Desenvolvido por Cauê Batista Chieratto <br />
-      2025</span
-    >
+    <footer></footer>
     <script src="/src/js/pageOne.js"></script>
+    <script src="/src/js/components/nav.js"></script>
+    <script src="/src/js/components/footer.js"></script>
   </body>
 </html>

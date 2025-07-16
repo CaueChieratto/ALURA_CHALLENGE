@@ -1,5 +1,4 @@
 const url = "http://localhost:4000/products";
-
 const containerProducts = document.querySelectorAll(".containerProducts");
 
 fetch(url)
@@ -20,7 +19,12 @@ function showProducts(productsList) {
                                 <img src="${product.image}" />
                                 <h3>${product.name}</h3>
                                 <p>R$ ${product.price.toFixed(2)}</p>
-                                <a href="">Ver Produto</a>
+                                <a id="${product.id}" 
+                                  href="products.html?name=${encodeURIComponent(
+                                    product.name
+                                  )}&id=${product.id}">
+                                  Ver Produto
+                                </a>                              
                               </div>`;
     });
   });
