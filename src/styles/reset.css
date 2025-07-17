@@ -124,10 +124,12 @@ table {
   border-spacing: 0;
 }
 
-button {
+button,
+textarea {
   border: none;
   outline: none;
   cursor: pointer;
+  padding: 0 !important;
 }
 
 input,
@@ -135,6 +137,7 @@ select,
 textarea {
   border: none;
   outline: none;
+  padding: 0 !important;
 }
 
 body,
@@ -142,6 +145,16 @@ button,
 input,
 textarea {
   font-family: var(--mainSource);
+}
+
+textarea {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
 }
 
 .hidden {

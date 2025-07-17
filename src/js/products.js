@@ -5,33 +5,30 @@ const url = "http://localhost:4000/products";
 fetch(url)
   .then((res) => res.json())
   .then((productsList) => {
-    let foundProduct = null;
-    productsList.forEach((categoryObject) => {
-      const productsArray = Object.values(categoryObject)[0];
-      const product = productsArray.find((p) => p.id == id);
-      if (product) foundProduct = product;
-    });
+    const foundProduct = productsList.find((p) => String(p.id) === String(id));
+
     if (foundProduct) {
+      console.log("Produto encontrado:", foundProduct);
       pageTitle(foundProduct);
       showProduct(foundProduct);
 
-      let allProducts = [];
-      productsList.forEach((categoryObject) => {
-        allProducts = allProducts.concat(Object.values(categoryObject)[0]);
-      });
-      showSimilarProducts(allProducts, foundProduct.id);
+      showSimilarProducts(productsList, foundProduct.id);
+    } else {
+      console.log("Produto não encontrado para o id:", id);
     }
   })
-  .catch((error) => console.log("Error:", error));
+  .catch((err) => {
+    console.error("Erro no fetch ou processamento:", err);
+  });
 
 function pageTitle(foundProduct) {
-  const image = document.createElement("link");
-  image.rel = "icon";
-  image.type = "image/png";
-  image.href = `${foundProduct.image}`;
-  document.head.appendChild(image);
+  const linkIcon = document.createElement("link");
+  linkIcon.rel = "icon";
+  linkIcon.type = "image/png";
+  linkIcon.href = foundProduct.image;
+  document.head.appendChild(linkIcon);
 
-  document.querySelector("title").textContent = `${foundProduct.name}`;
+  document.title = foundProduct.name;
 }
 
 function showProduct(foundProduct) {
@@ -40,10 +37,8 @@ function showProduct(foundProduct) {
         <div id="image"></div>
         <div class="productInfo">
           <h1>${foundProduct.name}</h1>
-          <p>R\$${foundProduct.price.toFixed(2)}</p>
-          <section>
-            ${foundProduct.description}
-          </section>
+          <p>R$ ${foundProduct.price.toFixed(2)}</p>
+          <section>${foundProduct.description}</section>
         </div> 
   `;
 
@@ -53,23 +48,25 @@ function showProduct(foundProduct) {
 
 function showSimilarProducts(allProducts, currentProductId) {
   const similarProductsContainer = document.getElementById("similarProducts");
-  const filtered = allProducts.filter((p) => p.id != currentProductId);
+
+  const filtered = allProducts.filter((p) => p.id !== currentProductId);
+
   const shuffled = filtered.sort(() => Math.random() - 0.5);
   const randomProducts = shuffled.slice(0, 6);
 
   similarProductsContainer.innerHTML = randomProducts
     .map(
-      (product) => `<div class="productsSimilar">
-                      <img src="${product.image}" />
-                      <h3>${product.name}</h3>
-                      <p>R\$ ${product.price.toFixed(2)}</p>
-                      <a id="${product.id}" 
-                          href="products.html?name=${encodeURIComponent(
-                            product.name
-                          )}&id=${product.id}">
-                          Ver Produto 
-                      </a>
-                    </div>`
+      (product) => `
+      <div class="productsSimilar">
+        <img src="${product.image}" />
+        <h3>${product.name}</h3>
+        <p>R$ ${product.price.toFixed(2)}</p>
+        <a id="${product.id}" href="products.html?name=${encodeURIComponent(
+        product.name
+      )}&id=${product.id}">
+          Ver Produto 
+        </a>
+      </div>`
     )
     .join("");
 }

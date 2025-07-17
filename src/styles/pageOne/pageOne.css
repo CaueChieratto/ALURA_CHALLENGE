@@ -50,8 +50,8 @@ main {
 }
 
 main section {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
@@ -59,6 +59,7 @@ main section {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .containerName h2 {
@@ -77,32 +78,86 @@ main section {
   color: #2a7ae4;
 }
 
+.containerName button {
+  padding: 0;
+  width: 164px;
+  height: 51px;
+  background-color: var(--buttonBlue);
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  transition: all 300ms ease-out;
+}
+
+.containerName button:hover {
+  background-color: var(--buttonBlueHover);
+  transform: scale(1.05);
+}
+
 .containerProducts {
   display: flex;
   gap: 16px;
 }
 
-.product {
+.containerAllProducts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 48px 16px;
+}
+
+.product,
+.allProduct {
   display: flex;
   flex-direction: column;
   gap: 8px;
   color: #464646;
+  position: relative;
 }
 
-.product h3 {
+.product:nth-child(n + 7) {
+  display: none;
+}
+
+.product h3,
+.allProduct h3 {
   font-weight: 500;
   font-size: 14px;
 }
 
-.product p {
+.product p,
+.allProduct p {
   font-weight: 700;
   font-size: 16px;
 }
 
-.product a {
+.product a,
+.allProduct a {
   color: #2a7ae4;
   font-weight: 700;
   font-size: 16px;
+}
+
+.allProduct h6 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.containerIcons {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 16px;
+}
+
+.icon {
+  max-width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.icon:first-of-type {
+  max-width: 14px;
 }
 
 @media (max-width: 768px) {
@@ -115,8 +170,13 @@ main section {
     display: none;
   }
 
-  .product img {
+  .product img,
+  .allProduct img {
     width: 164px;
+  }
+
+  .containerAllProducts {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -130,6 +190,10 @@ main section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
+  }
+
+  .containerAllProducts {
+    grid-template-columns: 1fr 1fr;
   }
 
   .banner h1 {
@@ -157,7 +221,31 @@ main section {
     font-size: 14px;
   }
 
-  .product img {
+  .product img,
+  .allProduct img {
     width: 156px;
+  }
+
+  .containerName button {
+    font-size: 14px;
+    font-weight: 600;
+    width: 156px;
+    height: 42px;
+  }
+
+  .containerNameAllProducts {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+    margin-left: 16px;
+  }
+
+  #allProducts {
+    gap: 64px;
+  }
+
+  .containerIcons {
+    right: 42px;
   }
 }

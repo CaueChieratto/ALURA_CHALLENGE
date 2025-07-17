@@ -20,37 +20,15 @@
   <body>
     <header>
       <nav></nav>
-      <section>
-        <div class="banner">
-          <h1>Dezembro Promocional</h1>
-          <p>Produtos selecionados com 33% de desconto</p>
-          <button id="consoleView" onclick="goToConsoleSection()">
-            Ver Consoles
-          </button>
-        </div>
-      </section>
     </header>
     <main>
-      <section id="starWarsSection">
-        <div class="containerName">
-          <h2>Star Wars</h2>
-          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
+      <section id="allProducts">
+        <div class="containerName containerNameAllProducts">
+          <h2>Todos os produtos</h2>
+          <button class="hidden" id="add">Adicionar produto</button>
         </div>
-        <div class="containerProducts" id="starWars"></div>
-      </section>
-      <section id="consolesSection">
-        <div class="containerName">
-          <h2>Consoles</h2>
-          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
-        </div>
-        <div class="containerProducts" id="consoles"></div>
-      </section>
-      <section id="diversosSection">
-        <div class="containerName">
-          <h2>Diversos</h2>
-          <a href="">Ver tudo <img src="/src/assets/icons/arrowRight.png" /></a>
-        </div>
-        <div class="containerProducts" id="diversos"></div>
+
+        <div class="containerAllProducts" id="geral"></div>
       </section>
     </main>
     <footer></footer>

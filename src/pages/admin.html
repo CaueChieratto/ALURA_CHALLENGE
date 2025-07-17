@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/vars.css" />
     <link rel="stylesheet" href="/src/styles/reset.css" />
+    <link rel="stylesheet" href="/src/styles/admin/admin.css" />
     <link rel="stylesheet" href="/src/styles/componentsStyles/footer.css" />
     <link rel="stylesheet" href="/src/styles/componentsStyles/nav.css" />
-    <link rel="stylesheet" href="/src/styles/login/login.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,14 +23,31 @@
     </header>
     <main>
       <div class="containerLogin">
-        <h2>Iniciar Sessão</h2>
-        <input id="email" type="text" placeholder="Escreva seu email" />
-        <input id="password" type="password" placeholder="Escreva sua senha" />
-        <button onclick="login()">Entrar</button>
+        <h2>Adicionar novo produto</h2>
+        <div class="containerInputsAdmin">
+          <h4>URL da imagem</h4>
+          <input id="imageUrl" type="text" />
+        </div>
+        <div class="containerInputsAdmin">
+          <h4>Categoria</h4>
+          <input id="section" type="text" />
+        </div>
+        <div class="containerInputsAdmin">
+          <h4>Nome do produto</h4>
+          <input id="name" type="text" />
+        </div>
+        <div class="containerInputsAdmin">
+          <h4>Preço do produto</h4>
+          <input id="price" type="text" />
+        </div>
+        <div class="containerInputsAdmin">
+          <h4>Descrição do produto</h4>
+          <textarea id="description"></textarea>
+        </div>
+        <button id="addNewProduct">Adicionar produto</button>
       </div>
     </main>
     <footer></footer>
-    <script src="/src/js/login.js"></script>
     <script src="/src/js/components/nav.js"></script>
     <script src="/src/js/components/footer.js"></script>
   </body>
