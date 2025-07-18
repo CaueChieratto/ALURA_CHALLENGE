@@ -8,13 +8,10 @@ fetch(url)
     const foundProduct = productsList.find((p) => String(p.id) === String(id));
 
     if (foundProduct) {
-      console.log("Produto encontrado:", foundProduct);
       pageTitle(foundProduct);
       showProduct(foundProduct);
 
       showSimilarProducts(productsList, foundProduct.id);
-    } else {
-      console.log("Produto não encontrado para o id:", id);
     }
   })
   .catch((err) => {
@@ -43,7 +40,16 @@ function showProduct(foundProduct) {
   `;
 
   const image = document.getElementById("image");
-  image.style.backgroundImage = `url(${foundProduct.image})`;
+  const imageUrl = foundProduct.image;
+
+  image.style.backgroundImage = `url(${imageUrl})`;
+
+  const testImage = new Image();
+  testImage.onerror = () => {
+    image.classList.add("no-image");
+    image.style.backgroundImage = "url(../assets/icons/no-image.jpg)";
+  };
+  testImage.src = imageUrl;
 }
 
 function showSimilarProducts(allProducts, currentProductId) {
@@ -58,7 +64,9 @@ function showSimilarProducts(allProducts, currentProductId) {
     .map(
       (product) => `
       <div class="productsSimilar">
-        <img src="${product.image}" />
+        <img src="${
+          product.image
+        }" onerror="this.classList.add('no-image'); this.src='../assets/icons/no-image.jpg';" />
         <h3>${product.name}</h3>
         <p>R$ ${product.price.toFixed(2)}</p>
         <a id="${product.id}" href="products.html?name=${encodeURIComponent(

@@ -25,7 +25,9 @@ function showProducts(productsList) {
 
     filtered.forEach((product) => {
       container.innerHTML += `<div class="product">
-                                <img src="${product.image}" />
+                                <img src="${product.image}" 
+                                    onerror="this.classList.add('no-image'); this.src='../assets/icons/no-image.jpg';" 
+                                />
                                 <h3>${product.name}</h3>
                                 <p>R$ ${product.price.toFixed(2)}</p>
                                 <a id="${product.id}" 
@@ -58,7 +60,9 @@ function pageAllProducts(allProducts) {
                                   <img class="icon delete" src="/src/assets/icons/Trash.png" />
                                   <img class="icon edit" src="/src/assets/icons/Pencil.png" />
                                 </div>
-                                <img src="${product.image}" />
+                                <img src="${product.image}" 
+                                    onerror="this.classList.add('no-image'); this.src='../assets/icons/no-image.jpg';" 
+                                />
                                 <h3>${product.name}</h3>
                                 <p>R$ ${product.price.toFixed(2)}</p>
                                 <h6 class="hidden">#${product.id}</h6>
@@ -124,7 +128,9 @@ async function del(product) {
     });
 
     if (response.ok) {
-      const productDiv = document.querySelector(`.allProduct .${product.id}`);
+      const productDiv = document.querySelector(
+        `.allProduct[data-id="${product.id}"]`
+      );
       if (productDiv) productDiv.remove();
       alert("Produto excluído com sucesso!");
     }

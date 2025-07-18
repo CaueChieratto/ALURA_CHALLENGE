@@ -54,7 +54,8 @@ main {
 }
 
 .containerInputsAdmin input,
-.containerInputsAdmin textarea {
+.containerInputsAdmin textarea,
+.containerInputsAdmin select {
   color: #464646;
   font-size: 16px;
   line-height: 20px;
