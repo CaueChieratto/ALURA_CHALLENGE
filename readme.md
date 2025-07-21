@@ -6,6 +6,9 @@
 
 Projeto de uma loja virtual com funcionalidades para exibição de produtos, busca, área administrativa para gerenciar produtos (CRUD), autenticação básica de administrador, e interação com uma API REST simulada localmente. O projeto utiliza HTML, CSS e JavaScript puro, consumindo dados via fetch a partir de uma API REST (exemplo: JSON Server rodando em `http://localhost:4000/products`).
 
+- Uma **API hospedada na Vercel** (apenas para leitura dos produtos via método `GET`), e
+- Um **backend local (JSON Server)** para simular as operações de escrita (`POST`, `PUT`, `DELETE`), usadas na área administrativa.
+
 ---
 
 ## Estrutura e Funcionalidades
@@ -74,13 +77,23 @@ Projeto de uma loja virtual com funcionalidades para exibição de produtos, bus
 
 ## API Simulada
 
-- A API está localizada em `http://localhost:4000/products`.
-- Operações suportadas:
-  - GET /products - lista todos os produtos
-  - GET /products/:id - busca produto por ID
-  - POST /products - adiciona novo produto
-  - PUT /products/:id - atualiza produto existente
-  - DELETE /products/:id - remove produto
+A aplicação usa dois ambientes para a API:
+
+### 🔹 API na Vercel (somente leitura)
+
+- URL: `https://api-alura-geek-gules.vercel.app/api/products`
+- Suporta apenas: `GET /api/products`
+- Utilizada para exibir os produtos ao público.
+
+### 🔹 API local (JSON Server)
+
+- URL: `http://localhost:4000/products`
+- Suporta operações completas:
+  - `GET /products` - lista todos os produtos
+  - `GET /products/:id` - busca produto por ID
+  - `POST /products` - adiciona novo produto
+  - `PUT /products/:id` - atualiza produto existente
+  - `DELETE /products/:id` - remove produto
 
 ---
 
@@ -117,5 +130,6 @@ Desenvolvido por Cauê Batista Chieratto
 - As imagens dos produtos são carregadas por URL; caso haja erro, uma imagem padrão é exibida.
 - A busca faz requisição conforme o texto digitado, exibindo resultados em tempo real.
 - O código permite futura expansão para incluir mais categorias, melhorias visuais e segurança.
+- **No ambiente de produção (API na Vercel), somente o método GET está disponível. As operações de criação, atualização e exclusão são executadas localmente via JSON Server.**
 
 ---

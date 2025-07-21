@@ -1,20 +1,44 @@
-const url = "http://localhost:4000/products";
+const urlLocal = "http://localhost:4000/products";
+const urlVercel = "https://api-alura-geek-gules.vercel.app/api/products";
+
 const containerProducts = document.querySelectorAll(".containerProducts");
 const isAdmin = sessionStorage.getItem("admin");
 
-fetch(url)
-  .then((response) => response.json())
-  .then((productsList) => showProducts(productsList))
-  .catch((erro) => console.log("Erro:", erro));
+let url = urlVercel;
 
-if (document.getElementById("geral")) {
+async function checkLocalApi() {
+  try {
+    const response = await fetch(urlLocal, { method: "GET" });
+    if (response.ok) {
+      url = urlLocal;
+      console.log("Usando API local (JSON Server)");
+    } else {
+      console.log("API local respondeu com erro, usando Vercel");
+    }
+  } catch (error) {
+    console.log("API local indisponível, usando Vercel");
+  }
+}
+
+async function startApp() {
+  await checkLocalApi();
+
   fetch(url)
     .then((response) => response.json())
-    .then((allProducts) => {
-      pageAllProducts(allProducts);
-    })
+    .then((productsList) => showProducts(productsList))
     .catch((erro) => console.log("Erro:", erro));
+
+  if (document.getElementById("geral")) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((allProducts) => {
+        pageAllProducts(allProducts);
+      })
+      .catch((erro) => console.log("Erro:", erro));
+  }
 }
+
+startApp();
 
 function showProducts(productsList) {
   containerProducts.forEach((container) => {
@@ -118,12 +142,17 @@ function findId(allProducts) {
 }
 
 async function del(product) {
+  if (url !== urlLocal) {
+    alert("Exclusão só disponível no ambiente local.");
+    return;
+  }
+
   const confirmed = confirm(`Deseja excluir o produto ${product.name}?`);
 
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`${url}/${product.id}`, {
+    const response = await fetch(`${urlLocal}/${product.id}`, {
       method: "DELETE",
     });
 
@@ -141,6 +170,11 @@ async function del(product) {
 }
 
 async function edit(product) {
+  if (url !== urlLocal) {
+    alert("Edição só disponível no ambiente local.");
+    return;
+  }
+
   const name = prompt("Nome do produto:", product.name);
   if (name === null) return;
 
@@ -180,7 +214,12 @@ async function edit(product) {
 }
 
 async function updateProduct(product) {
-  const response = await fetch(`${url}/${product.id}`, {
+  if (url !== urlLocal) {
+    alert("Atualização só disponível no ambiente local.");
+    return;
+  }
+
+  const response = await fetch(`${urlLocal}/${product.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(product),

@@ -1,12 +1,35 @@
-const url = "http://localhost:4000/products";
+const urlLocal = "http://localhost:4000/products";
+const urlVercel = "https://api-alura-geek-gules.vercel.app/api/products";
+
+let usingUrl = urlVercel;
+let canPost = false;
 
 const sectionContainer = document.getElementById("sectionContainer");
 const btnAddNewProduct = document.getElementById("addNewProduct");
 
-fetch(url)
-  .then((response) => response.json())
-  .then((productsList) => addNewProduct(productsList))
-  .catch((erro) => console.log("Erro:", erro));
+async function checkLocalApi() {
+  try {
+    const response = await fetch(urlLocal, { method: "GET" });
+    if (response.ok) {
+      usingUrl = urlLocal;
+      canPost = true;
+      console.log("Usando API local (JSON Server)");
+    } else {
+      console.log("API local respondeu com erro, usando Vercel");
+    }
+  } catch (error) {
+    console.log("API local indisponível, usando Vercel");
+  }
+}
+
+async function start() {
+  await checkLocalApi();
+
+  fetch(usingUrl)
+    .then((response) => response.json())
+    .then((productsList) => addNewProduct(productsList))
+    .catch((erro) => console.log("Erro:", erro));
+}
 
 sectionContainer.innerHTML = ` 
                                 <h4>Categoria</h4>
@@ -24,6 +47,13 @@ function addNewProduct(productsList) {
   const regexPrice = /^[0-9,]+$/;
 
   btnAddNewProduct.onclick = async () => {
+    if (!canPost) {
+      alert(
+        "Atenção: a adição de produtos só funciona quando o JSON Server local estiver rodando."
+      );
+      return;
+    }
+
     const newImage = document.getElementById("imageUrl").value;
     const newCategory = document.getElementById("category").value;
     const newName = document.getElementById("name").value;
@@ -60,7 +90,7 @@ function addNewProduct(productsList) {
 }
 
 async function updateProduct(product) {
-  const response = await fetch(`${url}`, {
+  const response = await fetch(`${usingUrl}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(product),
@@ -72,3 +102,5 @@ async function updateProduct(product) {
     alert("Produto adicionado com sucesso");
   }
 }
+
+start();

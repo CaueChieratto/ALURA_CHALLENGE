@@ -1,22 +1,47 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-const url = "http://localhost:4000/products";
 
-fetch(url)
-  .then((res) => res.json())
-  .then((productsList) => {
-    const foundProduct = productsList.find((p) => String(p.id) === String(id));
+const urlLocal = "http://localhost:4000/products";
+const urlVercel = "https://api-alura-geek-gules.vercel.app/api/products";
 
-    if (foundProduct) {
-      pageTitle(foundProduct);
-      showProduct(foundProduct);
+let useUrl = urlVercel;
 
-      showSimilarProducts(productsList, foundProduct.id);
+async function checkLocalApi() {
+  try {
+    const response = await fetch(urlLocal, { method: "GET" });
+    if (response.ok) {
+      useUrl = urlLocal;
+      console.log("Usando API local (JSON Server)");
+    } else {
+      console.log("API local respondeu com erro, usando Vercel");
     }
-  })
-  .catch((err) => {
-    console.error("Erro no fetch ou processamento:", err);
-  });
+  } catch (error) {
+    console.log("API local indisponível, usando Vercel");
+  }
+}
+
+async function start() {
+  await checkLocalApi();
+
+  fetch(useUrl)
+    .then((res) => res.json())
+    .then((productsList) => {
+      const foundProduct = productsList.find(
+        (p) => String(p.id) === String(id)
+      );
+
+      if (foundProduct) {
+        pageTitle(foundProduct);
+        showProduct(foundProduct);
+        showSimilarProducts(productsList, foundProduct.id);
+      }
+    })
+    .catch((err) => {
+      console.error("Erro no fetch ou processamento:", err);
+    });
+}
+
+start();
 
 function pageTitle(foundProduct) {
   const linkIcon = document.createElement("link");
